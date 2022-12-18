@@ -1,6 +1,7 @@
 from flask import Flask
 from src.database.db import db
 from src.user.views import user
+from src.word.views import word
 
 
 app = Flask(__name__)
@@ -10,6 +11,7 @@ app.config.from_pyfile('config.py')
 
 # views
 app.register_blueprint(user, url_prefix='/users')
+app.register_blueprint(word, url_prefix='/words')
 
 # db
 import src.user.entities
