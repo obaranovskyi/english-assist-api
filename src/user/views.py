@@ -1,12 +1,22 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify, request
+from .core import create_user, login as login_fn
 
 
 user = Blueprint('user', __name__)
 
-@user.route("/login")
+@user.route("/login", methods=['POST'])
 def login():
-  return 'Login user'
+    try:
+        user = login_fn(request.get_json())
+        return jsonify(user)
+    except ValueError:
+        return 'Invalid user data', 400
 
-@user.route("/register")
+@user.route("/register", methods=['POST'])
 def register():
-  return 'Register user'
+    try:
+        user = create_user(request.get_json())
+        return jsonify(user)
+    except ValueError:
+        return 'Invalid user data', 400
+

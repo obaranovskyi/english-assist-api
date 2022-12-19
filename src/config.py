@@ -10,4 +10,4 @@ load_dotenv(path.join(basedir, '.env'))
 SECRET_KEY = environ.get('SECRET_KEY')
 FLASK_ENV = 'development'
 SQLALCHEMY_DATABASE_URI =\
-    'sqlite:///' + path.join(basedir, 'english_assist.db')
+    'sqlite:///' + path.join(basedir, '../english_assist.db')
