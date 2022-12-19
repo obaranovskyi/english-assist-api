@@ -2,6 +2,7 @@ from flask import Flask
 from src.database.db import db
 from src.user.views import user
 from src.word.views import word
+from src.user.core import create_admin
 
 
 app = Flask(__name__)
@@ -21,6 +22,7 @@ db.init_app(app)
 with app.app_context():
     # db.drop_all()
     db.create_all()
+    create_admin()
 
 if __name__ == '__main__':
     app.run(debug=True, host='localhost', port=5001)
