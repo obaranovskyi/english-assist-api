@@ -2,7 +2,7 @@ import uuid
 import jwt
 from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash, check_password_hash
-from .dto import to_user_dto
+from .dtos import to_user_dto
 from .entities import User
 from ..database.db import db
 from ..config import SECRET_KEY

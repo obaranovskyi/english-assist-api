@@ -1,7 +1,7 @@
 __all__ = [
     'core',
     'decorators',
-    'dto',
+    'dtos',
     'entities',
     'views',
 ]
