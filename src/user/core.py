@@ -31,13 +31,12 @@ def login(user):
     user = User.query.filter_by(username=username).first()
     if not user:
         raise ValueError()
-    print(password, user.password, check_password_hash(password, user.password))
     if not check_password_hash(user.password, password):
         raise ValueError()
     return to_user_dto(user, generate_jwt_token(user))
         
 def generate_jwt_token(user):
     return jwt.encode({
-        'id': user.public_id,
+        'public_id': user.public_id,
         'exp': datetime.utcnow() + timedelta(days=3)
     }, SECRET_KEY, algorithm="HS256")
