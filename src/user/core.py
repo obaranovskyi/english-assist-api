@@ -2,7 +2,7 @@ import uuid
 import jwt
 from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from .errors import InvalidUserDataError
 from .consts import ADMIN
 from .dtos import to_user_dto
 from .entities import User
@@ -14,7 +14,7 @@ def create_user(user):
     username = user.get('username')
     password = user.get('password')
     if not username or not password:
-        raise ValueError()
+        raise InvalidUserDataError()
     hashed_password = generate_password_hash(password, method='sha256')
     user = User(
         public_id=str(uuid.uuid4()),
@@ -29,12 +29,12 @@ def login(user):
     username = user.get('username')
     password = user.get('password')
     if not username or not password:
-        raise ValueError()
+        raise InvalidUserDataError()
     user = User.query.filter_by(username=username).first()
     if not user:
-        raise ValueError()
+        raise InvalidUserDataError()
     if not check_password_hash(user.password, password):
-        raise ValueError()
+        raise InvalidUserDataError()
     return to_user_dto(user, generate_jwt_token(user))
         
 def generate_jwt_token(user):

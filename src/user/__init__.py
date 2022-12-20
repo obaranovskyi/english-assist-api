@@ -4,5 +4,6 @@ __all__ = [
     'decorators',
     'dtos',
     'entities',
+    'errors',
     'views',
 ]
